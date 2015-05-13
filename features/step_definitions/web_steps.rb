@@ -14,6 +14,19 @@ module WithinHelpers
     locator ? within(locator) { yield } : yield
   end
 end
+
+When(/^I submit my coordinates and boat orientation$/) do
+  page.has_content?('ABCDEFG')
+end
+
+Then(/^I can see my boat on the board$/) do
+  page.has_content?('BBB')
+end
+
+When(/^I click "([^"]*)"$/) do |name|
+  click_button(name)
+end
+
 World(WithinHelpers)
 
 Given /^(?:|I )am on (.+)$/ do |page_name|

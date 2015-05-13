@@ -1,0 +1,22 @@
+
+<center>
+Welcome: <%=$name%>
+<br>
+<br>
+Here's your board:
+<br>
+<pre>
+
+<%=$game.own_board_view $game.player_1%>
+
+</pre>
+<div>
+<form action='/newgame' method='post'>
+  Now place your ship
+  <input type='text' name='coords'>
+  <input type='text' name='orientation'>
+  <input type='submit' submit='Submit'>
+</form>
+</div>
+
+</center>
