@@ -1,46 +1,41 @@
 require 'battleships'
 require 'sinatra/base'
+require 'byebug'
 
 class BattleshipsWeb < Sinatra::Base
   set :views, Proc.new { File.join(root, "..", "views") }
-  set :session_secret, 'super secret'
   
-
+  @@game = Game.new Player, Board
+  @game = @@game
   
   get '/' do
-    
-    erb :index
+    @game
+    erb :homepage
   end
 
   get '/newplayer' do
-    $game = Game.new Player, Board
     erb :index2
   end
 
   get '/newgame' do
-  $name = params[:name]
-  erb :index3
+    @game
+    @name = params[:name]
+    # @name2 = params[:name2]
+    @board = @game.own_board_view @game.player_1
+    erb :index3
   end
 
   post '/newgame' do
-  @coords = params[:coords]
-  @orientation = params[:orientation]
-  $game.player_1.place_ship Ship.battleship, @coords, @orientation
-  erb :index3
+    @coords = params[:coords]
+    @orientation = params[:orientation].downcase
+    game.player_1.place_ship Ship.battleship, @coords, @orientation
+    @board = game.own_board_view game.player_1
+    erb :index3
   end
 
-
-  # get '/placeship' do
-  # @coords = params[:coords]
-  # @orientation = params[:orientation]
-  # $game
-  # erb :index4
-  # end
  
   # start the server if ruby file executed directly
   run! if app_file == $0
 end
-
-
 
 

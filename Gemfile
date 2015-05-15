@@ -4,6 +4,7 @@ gem 'sinatra'
 gem 'battleships' # if you are using Ben's gem
 
 group :development, :test do
+  gem 'byebug'
   gem 'capybara'
   gem 'cucumber'
   gem 'cucumber-sinatra'
